@@ -10,9 +10,15 @@ const MainComponent = ({
     );
 };
 
+
+const customComparator = (prevProps, nextProps) => {
+
+    // раз дефолтное значение всегда одно и тоже просто проверяем на предыдущий пропс
+    return (JSON.stringify(nextProps.user) === JSON.stringify(prevProps.user))
+  };
 // memoized component
 const ChildComponent = memo(({ user: { name, age } }) => {
     return (
         <div>user name: {name}, user age: {age}</div>
     )
-});
+},customComparator);
